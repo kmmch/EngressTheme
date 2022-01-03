@@ -1,0 +1,31 @@
+//*------------------*
+//*  変数管理
+//*------------------*
+
+//color
+$color-black: #333333;
+$color-white: #ffffff;
+$color-navy: #1B224C;
+$color-gray: #F8F8F8;
+
+$header-color: $color-white;
+
+$material-btn-color: #F5A623;
+$contact-btn-color: #1B224C;
+
+$dropshadow-color: #00000029;
+//font-family
+//-->ヒラギノver.
+// $font-main: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ",
+//   Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+
+//-->游ゴシックver.
+$font-main:"游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+
+//*------------------*
+//*  レスポンシブ定義
+//*------------------*
+
+//ブレイクポイント
+$tb: 970px; //タブレット
+$mb: 559px; //スマホ

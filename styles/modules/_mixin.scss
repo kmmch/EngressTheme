@@ -1,0 +1,24 @@
+//@mediaのフォーマット
+//タブレット
+@mixin tablet {
+    @media screen and (max-width: $tb) {
+      @content;
+    }
+  }
+  //スマホ
+  @mixin mobile {
+    @media screen and (max-width: $mb) {
+      @content;
+    }
+  }
+  
+  //*------------------*
+  //*  font-size定義
+  //*------------------*
+  //$sizeにpx表示を入れて使う
+  
+  @mixin rem($size) {
+    font-size: $size + px; /*IE9以前に対応する*/
+    font-size: ($size / 16) + rem;
+  }
+  

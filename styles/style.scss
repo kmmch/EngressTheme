@@ -1,0 +1,2226 @@
+@import "modules/variables";
+@import "modules/mixin";
+
+
+//*------------------*
+//*  base(共通)
+//*------------------*
+* {
+  box-sizing: border-box;
+}
+a {
+  color:$color-black;
+  text-decoration: none;
+}
+body {
+  @include rem(10);
+  color: $color-black;
+  font-family: $font-main;
+}
+img {
+  width: 100%;
+  vertical-align: bottom;
+}
+ul {
+  list-style: none;
+}
+
+.pc {
+  @include tablet {
+    display: none;
+  }
+  @include mobile {
+    display: none;
+  }
+}
+
+.tablet {
+  display: none;
+  @include tablet {
+    display: block;
+  }
+  @include mobile {
+    display: none;
+  }
+}
+
+.mobile {
+  display: none;
+  @include tablet {
+    display: none;
+  }
+  @include mobile {
+    display: block;
+  }
+}
+
+.container {
+  width: 900px;
+  margin: 0 auto;
+  @include tablet {
+    width: 700px;
+  }
+  @include mobile {
+    width: 95%;
+  }
+
+  &_contact {
+    width: 700px;
+    margin: 0 auto;
+
+    @include mobile {
+      width: 90%;
+    }
+  }
+}
+
+.section {
+  &__ttl {
+    margin: 58px 0 30px 0;
+    @include rem(32);
+    font-weight: bold;
+    color: $color-navy;
+    text-align: center;
+  }
+}
+
+.txt-yellow {
+  color: $material-btn-color;
+  text-decoration: underline;
+}
+
+//------------ここからヘッダー----------------->
+.header {
+  //ヘッダーを固定する場合
+  width:100%;
+  position: fixed;
+  z-index:999;
+  background-color: $header-color;
+  box-shadow: 0px 3px 10px -5px rgba(0,0,0,0.5);
+
+  &__inner {  
+    padding: 27px 10px 26px 25px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__tel {
+    text-align: end;
+    margin-right:23px;
+    margin-top:25px;
+
+    @include tablet {
+      text-align: center;
+      margin-right:0;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    &_time {
+      @include rem(12);
+    }
+
+    &_number {
+      @include rem(16);
+      font-weight: bold;
+      position:relative;
+
+      &::before {
+        content: url(../images/phone@2x.png);
+        transform: scale(0.5);
+        position:absolute;
+        top:-6px;
+        left:-17px;
+
+        @include tablet {
+          top:-7px;
+          left:114px;
+        }
+
+        // <Tips> 疑似要素に画像を表示させる
+        // https://kouhekikyozou.com/css_content_image
+      }
+    }
+  }
+
+  &__dummy {
+    height: 106px;
+
+    @include tablet {
+      height: 82px
+    }
+  }
+}
+
+//ナビゲーション
+.nav {
+  margin-right: auto;
+  @include tablet {
+    display: none;
+  }
+  &__list {
+    display: inline-block;
+    margin-left: 2vw;
+    @include rem(16);
+    font-weight: bold;
+  }
+}
+
+.page_head {
+  height: 221px;
+
+  &#price {
+    background-image: url(../images/plan.png);
+  }
+  
+  &#blog {
+    background-image: url(../images/blog.png);
+  }
+
+  &#news {
+    background-image: url(../images/news.png);
+  }
+
+  &#contact {
+    background-image: url(../images/cta.png);
+  }
+
+  &__container {
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.page {
+  &__ttl {
+    @include rem(32);
+    font-weight: bold;
+    color: $color-white;
+  }
+}
+
+// ヘッダーのボタン
+.btn_square {
+  color: $color-white;
+  display: inline-block;
+  text-align: center;
+  padding:18px 43px;
+  @include rem(14);
+  border-radius:5px;
+}
+
+.btn_round {
+  color: $color-white;
+  display: inline-block;
+  text-align: center;
+  padding:22px 101px;
+  @include rem(18);
+  border-radius:31px;
+}
+
+.material {
+  background-color: $material-btn-color;
+  margin-right:10px;
+}
+
+.contact {
+  background-color: $contact-btn-color;
+}
+
+//------------ここまでヘッダー----------------->
+
+
+//------------ここからパンくず----------------->
+.breadcrumb {
+  background-color: $color-gray;
+
+  &__container {
+    max-width: 900px;
+    margin: 0 auto;
+
+    @include tablet {
+      max-width:90%;
+    }
+  }
+
+  &__nav {
+    & > ul {
+      display: flex;
+      padding: 19px 0;
+
+      & > span {
+        margin: 0 12px;
+        @include rem(12);
+    
+        & > a {
+          @include rem(12);
+          text-decoration: underline;
+        }
+    
+        &:nth-last-child(1) {
+          & > p {
+            @include rem(12);
+          }
+    
+          &::after {
+            display: none;
+          }
+        }    
+      }
+    }
+  }
+}
+//------------ここまでパンくず----------------->
+
+//------------ここからhamburgerメニュー----------------->
+//スマホのナビゲーション(ハンバーガーメニュー)
+//ハンバーガーの部分
+.hamburger-btn {
+  display: none;
+  @include tablet {
+    display: block;
+    position: relative;
+    width: 25px;
+    height: 16px;
+    margin-right: 4vw;
+    z-index: 20;
+  }
+}
+.hamburger-btn__parts {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: $color-black;
+  position: absolute;
+  transition: transform 0.5s, opacity 0.5s;
+}
+.hamburger-btn__parts {
+  &.-top {
+    top: 0;
+  }
+  &.-middle {
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  &.-bottom {
+    bottom: 0;
+  }
+}
+
+//タップ後のハンバーガー
+//１つ目のspanを-45度にする
+.hamburger-btn.active {
+  .hamburger-btn__parts {
+    &.-top {
+      transform: translateY(10px) rotate(-45deg);
+    }
+    //2つ目のspanを消す
+    &.-middle {
+      opacity: 0;
+    }
+    //3番目のspanを45度に
+    &.-bottom {
+      transform: translateY(-4px) rotate(45deg);
+    }
+  }
+}
+
+//スライドメニュー
+.hamburger {
+  display: none;
+  @include tablet {
+    display: block;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: translateX(100vw);
+    transition: all 0.3s;
+    background-color: $color-white;
+
+    &__lists {
+      margin-top: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 45vh;
+    }
+
+    &__list {
+      @include rem(16);
+      text-align: center;
+
+      & > .header__tel {
+        margin:0;
+      }
+    }
+    &__list + &__list {
+      padding-top: 50px;
+    }
+    &__link {
+      text-decoration: none;
+      color: $color-black;
+    }
+  }
+}
+//activeクラスをつけたら、スライドイン
+.hamburger.active {
+  transform: translateX(0);
+}
+
+.flex {
+  display:flex;
+
+  &__center {
+    justify-content: center;
+  }
+}
+
+.bold {
+  font-weight:bold;
+}
+
+//------------//ここまでhamburgerメニュー------------------>
+
+//------------//ここからmain------------------>
+//*------------------*
+//*  fv
+//*------------------*
+.fv {
+  width:100%;
+  height:476px;
+
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url(../images/fv.png);
+
+  &__inner {
+    text-align: center;
+  }
+
+  &__ttl {
+    margin-bottom:28px;
+
+    & > h2 {
+      @include rem(48);
+      font-weight: bold;
+      color: $color-white;
+      text-shadow: 0px 3px 6px $dropshadow-color;
+    }
+  }
+
+  &__description {
+    margin-bottom: 51px;
+    & > p {
+      @include rem(18);
+      max-width:328px;
+      width:100%;
+      margin:0 auto;
+      color: $color-white;
+      line-height: 30px;
+    }
+  }
+
+  &__btn {
+    margin-bottom: 22px;
+  }
+
+  &__link {
+    & > a {
+      @include rem(16);
+      color: $color-white;
+      text-decoration: underline;
+    }
+  }
+}
+
+//*------------------*
+//*  about
+//*------------------*
+.about {
+  background-color: $color-navy;
+  width:100%;
+  // height: 604px;
+  color:$color-white;
+
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+  &__ttl {
+    margin-top:63px;
+    margin-bottom: 65px;
+    & > h2 {
+      text-align: center;
+      @include rem(35);
+      font-weight: bold;
+    }
+  }
+
+  &__question_wrapper {
+    display:flex;
+    justify-content: center;
+    align-items: center;  
+    margin-bottom: 83px;
+
+    @include mobile {
+      display: block;
+    }
+  }
+
+  &__question {
+    text-align: center;
+
+    & > p{
+      @include rem(18);
+      font-weight: bold;
+      line-height:40px;
+    }
+
+    &:nth-child(2) {
+      margin:0 30px 0 57px;
+
+      @include mobile {
+        margin:20px 0;
+      }
+    }
+  }
+
+  &__catchcopy {
+    color:$color-navy;
+    background-color: $color-white;
+
+    width: 900px;
+    height:248px;
+    margin-bottom: 54px;
+    padding-top: 11px;
+    padding-left: 16px; 
+
+    @include tablet {
+      width:600px;
+      padding-top: 11px;
+      padding-left: 11px; 
+    }
+
+    @include mobile {
+      width:100%;
+      padding-top: 5px;
+      padding-left: 5px; 
+    }
+
+    &__wrapper {
+      border: 5px solid $color-navy;
+      width: 868px;
+      height:225px;
+
+      display:flex;
+      justify-content: center;
+      align-items: center; 
+      
+      @include tablet {
+        width:580px;
+      }
+
+      @include mobile {
+        width:99%;
+        height:238px;
+      }
+    }
+
+    &__ttl {
+      text-align: center;
+      margin-bottom:25px;
+
+      @include mobile {
+        margin-bottom:10px;
+      }
+
+      & > h2 {
+        @include rem(36);
+        font-weight: bold;
+        line-height:50px;
+
+        @include mobile {
+          @include rem(28); 
+          line-height:40px;
+        }
+
+        & > span {
+          background: linear-gradient(transparent 70%, #F5A623 0%);
+        }
+      }
+    }
+
+    &__description {
+      text-align: center;
+
+      & > p {
+        @include rem(18);
+        line-height:30px;
+      }
+    }
+  }
+}
+
+//*------------------*
+//*  features
+//*------------------*
+.features {
+  background-color: $color-white;
+  padding: 59px 0 39px 0;
+
+  &__ttl {
+    margin-bottom: 59px;
+    & > h2 {
+      @include rem(36);
+      color:$color-navy;
+      text-align: center;
+    }
+  }
+}
+
+.feature {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 60px;
+
+  &:nth-child(2) {
+    flex-flow: row-reverse;
+  }
+
+  &:nth-child(3) {
+    margin-bottom: 93px;
+  }
+
+  @include mobile {
+    display: block;
+  }
+
+
+  &__index {
+    margin-bottom: 35px;
+    & > span {
+      display: inline-block;
+      @include rem(12);
+      padding: 8px 25px 10px 26px;
+      background-color: $material-btn-color;
+      color: $color-white;
+    }
+  }
+
+  &__ttl {
+    margin-bottom: 39px;
+    & > h3 {
+      @include rem(26);
+      color:$color-navy;
+      font-weight: bold;
+    }
+  }
+
+  &__description {
+    width:500px;
+
+    @include tablet {
+      width:300px;
+    }
+    & > p {
+      @include rem(16);
+      color:$color-navy;
+      line-height: 30px;
+    }
+  }
+}
+
+.price_link__box {
+  width: 900px;
+  margin: 0 auto;
+  height: 217px;
+  background-image: url(../images/price.png);
+
+  display:flex;
+  justify-content: center;
+  align-items: center;  
+
+  @include tablet {
+    width: 100%;
+  }
+
+  &__ttl {
+    margin-bottom: 37px;
+
+    & > h3 {
+      @include rem(26);
+      color:$color-white;
+      font-weight: bold;
+
+      @include mobile {
+        @include rem(20);
+      }    
+    }
+  }
+  &__btn {
+    text-align: center;
+    & > a {
+      @include rem(16);
+      color:$color-white;
+      font-weight: bold;
+
+      padding: 16px 44px;
+      border: 1px solid $color-white;
+      border-radius: 30px;
+    }
+  }
+}
+
+//*------------------*
+//*  cases
+//*------------------*
+.cases {
+  background-color: $color-navy;
+  color:$color-white;
+
+  padding: 58px 0 60px 0;
+
+  &__ttl {
+    margin-bottom: 132px;
+
+    @include mobile {
+    margin-bottom: 80px;   
+    }    
+    & > h2 {
+      @include rem(36);
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+}
+
+.case {
+  width: 280px;
+
+  @include tablet {
+    width: 200px;
+  }    
+  @include mobile {
+    width: 300px;
+    margin: 30px auto;
+  }    
+
+
+  &__wrapper {
+    display:flex;
+    justify-content: space-around;
+    align-items: center; 
+    
+    @include mobile {
+      display: block;
+    }    
+  }
+
+  &__description {
+    margin-bottom: 9px;
+    @include rem(16);
+    font-weight: bold;
+    line-height: 25px;
+  }
+
+  &__img {
+    background-color: $color-white;
+    width:280px;
+    height:171px;
+    margin-bottom: 16px;
+    padding-top: 31px;
+
+    @include tablet {
+      width: 200px;
+    }      
+
+    @include mobile {
+      width: 300px;
+    }
+
+    & > figure {
+      text-align: center;
+      & > img {
+        width:125px;
+        height:140px;
+      }
+    }
+  }
+
+  &__profile {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  &__job {
+    @include rem(16);
+    background-color: $color-white;
+    color: $color-navy;
+    line-height: 32px;
+    width: 100px;
+    padding-left:10px;
+  }
+
+  &__name {
+    @include rem(16);
+    background-color: $color-white;
+    color: $color-navy;
+    line-height: 32px;
+    width: 172px;
+    padding-left:10px;
+  }
+
+  &__point {
+    @include rem(16);
+    background-color: $color-white;
+    color: $color-navy;
+    line-height: 32px;
+    padding-left:10px;
+
+    @include tablet {
+      @include rem(13);
+    }      
+  }
+}
+
+//*------------------*
+//*  useflow
+//*------------------*
+.useflow {
+  background-color: $color-white;
+  padding: 58px 0 75px 0;
+
+  &__ttl {
+    margin-bottom: 53px;
+    & > h2 {
+      @include rem(36);
+      font-weight: bold;
+      text-align: center;
+      color:$color-navy;
+    }
+  }
+
+  &__inner {
+    & > ul {
+      & > li {
+        display:flex;
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  &__number {
+    background-color: $material-btn-color;
+    padding: 24px;
+
+    & > p {
+      @include rem(16);
+      font-weight: bold;
+      color: $color-white;
+    }
+  }
+
+  &__txts {
+    display: flex;
+    align-items: center;
+    background-color: $color-gray;
+    width: 100%;
+
+    @include tablet {
+      display: block;
+      padding-top: 11px;
+    }
+
+    @include mobile {
+      padding-top: 7px;
+    }
+  }
+
+  &__item {
+    @include rem(18);
+    font-weight: bold;
+    color: $color-navy;
+    width: 214px;
+    padding-left: 21px;
+
+    position: relative;
+
+    @include tablet {
+      padding-bottom: 5px;
+    }
+
+    @include mobile {
+      @include rem(16);
+    }
+    
+    &::before {
+      content: '';
+      position: absolute;
+      height:29px;
+      width: 1px;
+      background-color: #C3C3C3;
+      top: -6px;
+      left:193px;
+
+      @include tablet {
+        display: none;
+      }
+    }
+  }
+
+  &__description {
+    @include rem(16);
+    color: $color-navy;
+    padding-left: 53.5px;
+
+    @include tablet {
+      padding-left: 21px;
+    }
+
+    @include mobile {
+      @include rem(14);
+    }
+  }
+
+}
+
+//*------------------*
+//*  top_questions
+//*------------------*
+.top_questions {
+  background-color: $color-white;
+  padding-bottom: 90px;
+
+  &__ttl {
+    margin-bottom: 32px;
+    & > h2 {
+      @include rem(36);
+      font-weight: bold;
+      text-align: center;
+      color:$color-navy;  
+    }
+  }
+
+  &__area {
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
+
+    @include mobile {
+      width:99%;
+    }
+  }
+}
+
+.top_question {
+  &:nth-child(1) {
+    & > section {
+      border-top: 1px solid #1B224C;
+    }
+  }
+
+  & > section {
+    border-bottom: 1px solid #1B224C;
+  }
+
+  &__ttl {
+    position:relative;
+    cursor: pointer;
+    @include rem(16);
+    font-weight: normal;
+    padding: 3% 3% 3% 0;
+    transition: all .5s ease;
+
+    @include mobile {
+      @include rem(14);
+    }
+
+    &::before,
+    &::after {
+      position:absolute;
+      content:'';
+      width: 15px;
+      height:2px;
+      background-color: #333;
+    }
+
+    &::before {
+      top:48%;
+      right:20px;
+      transform: rotate(0deg);
+
+      @include mobile {
+        right:0px;
+      }
+    }
+
+    &::after {
+      top:48%;
+      right:20px;
+      transform: rotate(90deg);
+
+      @include mobile {
+        right:0px;
+      }
+    }
+
+    &.close {
+      &::before {
+        transform: rotate(45deg);
+      }
+      
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  &__box {
+    display: none;
+    background: #f3f3f3;
+    margin: 0 3% 3% 0;
+    padding: 3%;
+    @include rem(16);
+
+    @include mobile {
+      @include rem(14);
+    }
+  }
+}
+
+
+//*------------------*
+//*  top_update
+//*------------------*
+.top_update {
+  background-color: $color-white;
+  padding-bottom: 119px;
+
+  & > .container {
+    display:flex;
+
+    @include mobile {
+      display:block;
+    }
+  }
+
+  &__wrapper {
+    width:50%;
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  &__ttl {
+    @include rem(32);
+    font-weight: bold;
+    color:$color-navy;
+    margin-bottom: 30px;
+
+    @include mobile {
+      margin-top:50px;
+      text-align: center;
+    }
+  }
+}
+
+.top_blog {
+  display:flex;
+  margin-bottom: 31px;
+
+  @include mobile {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  &__info {
+    margin-left: 20px;
+    
+    & > h4 {
+      margin-bottom: 10px;
+      height:78px;
+    }
+  }
+
+  &__img {
+    position: relative;
+    width:150px;
+    height:110px;
+  }
+
+  &__category {
+    position: absolute;
+    background-color: $color-navy;
+    color: $color-white;
+    @include rem(12);
+
+    display: inline-block;
+    padding: 4px 9px 7px 9px;
+
+    top:0px;
+    left: 0px;
+  }
+
+  &__ttl {
+    @include rem(16);
+    font-weight: bold;
+    color:$color-navy;
+    text-decoration: underline;
+  }
+
+  &__time {
+    @include rem(12);
+    color:$color-navy;
+  }
+}
+
+.top_info {
+  @include mobile {
+    width: 75%;
+    margin: 0 auto;
+  }
+  & > h4 {
+    margin-top: 16px;
+    height:59px;
+    font-weight: normal;
+    text-decoration: underline;
+  }
+
+  &__time {
+    @include rem(12);
+    color:$color-navy;
+  }
+
+  &__ttl {
+    @include rem(16);
+    color:$color-navy;
+  }
+}
+
+
+//*------------------*
+//*  コース・料金
+//*------------------*
+#priceSystem {
+  padding:58px 0 90px 0;
+}
+.price {
+  &__figure {
+    display:flex;
+    justify-content: center;
+    margin: 60px 0 45px 0;
+  }
+
+  &__description {
+    text-align: start;
+    @include rem(16);
+  }
+}
+
+.fee {
+  width: 280px;
+  background-color: $color-navy;
+  color: $color-white;
+  padding: 3% 5%;
+  text-align: center;
+  @include rem(22);
+  font-weight: bold;
+}
+.addition_figure {
+  position: relative;
+  margin:0 35px;
+  & > span {
+    display: inline-block;
+    background-color: $color-navy;
+    width:26px;
+    height:2px;
+    position: absolute;
+
+    &:nth-child(1) {
+      top:37px;
+      left:-13px;
+    }
+
+    &:nth-child(2) {
+      transform: rotate(90deg);
+      top:36px;
+      left:-13px;
+      height:1.5px;
+    }
+  }
+}
+
+#priceTable {
+  padding:70px 0 162px 0;
+}
+
+.plan {
+  width: 221px;
+  height: 414px;
+  margin-top: 35px;
+  margin-right: 7px;
+
+  @include tablet {
+    width:25%;
+  }
+
+  @include mobile {
+    width:100%;
+    height: 100%;
+  }
+
+  &__scroll {
+    @include mobile {
+      overflow-x: scroll;
+    }
+  }
+
+  &__list {
+    display: flex;
+    margin-top: 70px;
+    @include mobile {
+      width:900px;
+    }
+  }
+
+  &__ttl {
+    @include rem(16);
+    font-weight: bold;
+    color: $color-white;
+    text-align: center;
+
+    @include tablet {
+      @include rem(15);
+    }
+
+    &__wrapper {
+      background-color: $color-navy;
+      padding: 17px 22px;
+    }
+  }
+
+  &__contents {
+    width: 180px;
+    height: 414px;
+    margin: 0 auto;
+
+    @include tablet {
+      width:100%;
+    }
+
+    &__wrapper {
+      border: 1px solid $color-navy;
+    }
+  }
+
+  &__price {
+    margin-top: 30px;
+    margin-bottom: 14px;
+    @include rem(25);
+    font-weight: bold;
+    color: $color-navy;
+    text-align: center;
+
+    &_notice {
+      margin-bottom: 48px;
+      @include rem(16);
+      color: $color-navy;
+      text-align: center;
+    }
+  }
+
+  &__details {
+    padding-left: 20px;
+
+    @include tablet {
+      padding-left: 30px;
+    }
+
+    &_item {
+      margin-bottom: 23px;
+      @include rem(16);
+      color: $color-navy;
+
+      @include tablet {
+        @include rem(14);
+      }
+
+      & > p {
+        position: relative;
+        &::before {
+          position: absolute;
+          content: '';
+          width: 10px;
+          height: 5px;
+          border-left: 2px solid $color-navy;
+          border-bottom: 2px solid $color-navy;
+          transform: rotate(-45deg);
+          top: 3px;
+          left:-20px;
+        }
+        
+        &.no-check {
+          &::before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.recommend {
+  &.plan {
+    margin-top: 0px;
+  }
+
+  &.plan__ttl__wrapper {
+    background-color: $material-btn-color;
+
+    & > p {
+      margin-bottom: 19px;
+      @include rem(16);
+      color: $color-white;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+  &.plan__contents__wrapper {
+    border-top: 1px solid $material-btn-color;
+  }
+}
+
+
+//*------------------*
+//*  新着一覧（ブログ）
+//*------------------*
+#blogList {
+  & > h2 {
+    margin-bottom: 60px;
+  }
+}
+.blog__item {
+  margin: 30px 0;
+  display: flex;
+
+  @include mobile {
+    margin: 30px 0 50px 0;
+    display: block;
+  }
+
+  &_thumbnail {
+    position:relative;
+    max-width:240px;
+
+    & > figure {
+      @include mobile {
+        text-align: center;
+      }
+      
+      & > img {
+        width: 240px;
+        height: 148px;
+
+        @include mobile {
+          width: 100%;
+          height:100%;
+        }
+      }
+    }
+  }
+
+  &_category {
+    position: absolute;
+    background-color: $color-navy;
+    color: $color-white;
+
+    display: inline-block;
+    padding: 8px 13px 8px 12px;
+
+    top:0px;
+    left: 0px;
+  }
+
+  &_txt {
+    margin-left: 50px;
+
+    @include mobile {
+      width:100%;
+      margin: 20px auto 0 auto;
+    }
+  }
+
+  &_time {
+    @include rem(16);
+    color: $color-navy;
+  }
+
+  &_ttl {
+    margin: 20px 0;
+    @include rem(26);
+    color: $color-navy;
+    font-weight: bold;
+    text-decoration: underline;
+
+    & > a {
+      word-break: break-all;
+    }
+  }
+
+  &_description {
+    @include rem(16);
+    color: $color-navy;
+  }
+}
+
+
+//*------------------*
+//*  お知らせ一覧
+//*------------------*
+.news__list {
+  margin-top:15px;
+}
+
+.news__item {
+  display: flex;
+  padding:23.5px 0 24.5px 0;
+  border-bottom: 1px solid rgb(173, 170, 170);
+
+  &:nth-child(1) {
+    border-top: 1px solid rgb(173, 170, 170);
+  }
+
+  &_date {
+    margin-right: 51px;
+    @include rem(16);
+    color: $color-navy;
+
+    @include mobile {
+      // margin-right: 10px;
+      margin-right: 10px;
+      width: 40%;
+    }
+  }
+
+  &_link {
+    @include rem(16);
+    color: $color-navy;
+    text-decoration: underline;
+  }
+}
+
+
+//*------------------*
+//*  ページャー
+//*------------------*
+.page_nation {
+  @include rem(16);
+  color: $color-navy;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+
+  & > .page-numbers {
+    padding: 17px 20px;
+    margin: 0 10px;
+    border: 1px solid $color-navy;
+
+    @include mobile {
+      padding: 13px 13px;
+      margin: 0 5px;
+    }
+
+    &.current {
+      background-color: $color-navy;
+      color: $color-white;
+    }
+
+    &.dots {
+      border: none;
+    }
+  }
+
+
+  &__container {
+    width:100%;
+    margin:79px auto 45px auto;
+  }
+
+  &__item {
+    padding: 17px 20px;
+    margin: 0 10px;
+    border: 1px solid $color-navy;
+
+    &.current {
+      background-color: $color-navy;
+
+      & > a {
+        color: $color-white;
+      }
+
+      & > span {
+        color: $color-white;
+      }
+    }
+
+    &.dot {
+      border: none;
+    }
+  }
+}
+//*------------------*
+//*  お知らせ詳細
+//*------------------*
+#newsDetail {
+  padding: 60px 0px 69px 0px;
+
+  @include tablet {
+    padding: 60px 10%;
+  }
+}
+
+.news {
+  width: 100%;
+  margin-right: 36px;
+
+  @include mobile {
+    width: 100%;
+  }
+
+  &__head {
+    margin-bottom: 60px;
+    &_ttl {
+      color: $color-navy;
+      @include rem(28);
+      font-weight: bold;
+      margin: 30px 0 20px 0;
+    }
+
+    &_time {
+      color: $color-navy;
+      @include rem(16);
+      text-align: end;
+      display: block;
+    }
+  }
+
+  &__body {
+    & > h2 {
+      margin-bottom: 30px;
+      @include rem(26);
+      color: $color-navy;
+      font-weight: bold;
+    }
+
+    & > h3 {
+      margin-top: 27px;
+      padding-left: 10px;
+      border-left: 4px solid $color-navy;
+      @include rem(22);
+      color: $color-navy;
+      font-weight: bold;
+    }
+
+    & > p {
+      margin-top: 30px;
+      @include rem(16);
+      color: $color-navy;
+    }
+
+    & > .quote {
+      margin-bottom: 30px;
+      padding: 27px 26px 17px 74px;
+      background-color: $color-gray;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        content:"“";
+        @include rem(90);
+        color: #B4B4B4;
+        top: 16px;
+        left: 17px;
+        height: 45px;
+      }
+    }
+
+    & > figure {
+      margin-bottom: 30px;
+
+      & > img {
+        width:auto;
+      }
+    }
+
+    & > ul {
+      margin-bottom: 30px;
+      list-style-type: disc;
+      list-style-position: inside;
+      
+      & > li {
+        @include rem(16);
+        color: $color-navy;
+
+        &::marker {
+          color: $material-btn-color;
+          font-size:30px;
+        }
+      }
+    }
+
+    & > a {
+      display: inline-block;
+      margin-bottom: 30px;
+      @include rem(18);
+      color: $material-btn-color;
+      text-decoration: underline;
+    }
+  }
+
+}
+
+
+//*------------------*
+//*  ブログ詳細
+//*------------------*
+#blogDetail {
+  padding: 60px 0px 69px 0px;
+  display:flex;
+
+  @include tablet {
+    display: block;
+    padding: 60px 10%;
+  }
+}
+
+.blog {
+  width: 590px;
+  margin-right: 36px;
+
+  @include mobile {
+    width: 100%;
+  }
+
+  &__head {
+    &_category {
+      display: inline-block;
+      background-color: $color-navy;
+      color: $color-white;
+      @include rem(12);
+      padding: 9px 25px 10px 25px;
+    }
+
+    &_ttl {
+      color: $color-navy;
+      @include rem(28);
+      font-weight: bold;
+      margin: 30px 0 20px 0;
+    }
+
+    &_info {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &_sns {
+      & .facebook {
+        display: inline-block;
+        color: $color-white;
+        background-color: #305097;
+        padding:5px 9px 5px 10px;
+        border-radius: 3px;
+        font-weight: bold;
+        @include rem(10);
+      }
+
+      & .share {
+        display: inline-block;
+        color: $color-white;
+        background-color: #305097;
+        padding:5px 9px 5px 7px;
+        border-radius: 3px;
+        font-weight: bold;
+        @include rem(10);
+      }
+
+      & .twitter {
+        display: inline-block;
+        color: $color-white;
+        background-color: #00ACED;
+        padding:5px 8px 5px 10px;
+        border-radius: 3px;
+        font-weight: bold;
+        @include rem(10);
+      }
+    }
+
+    &_time {
+      padding: 10px 0 20px 0;
+      color: $color-navy;
+      @include rem(16);
+    }
+  }
+
+  &__eyecatch {
+    margin: 22px 0 40px 0;
+
+    & > figure {
+      & > img {
+        width: 590px;
+        height: 370px;
+
+        @include mobile {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  &__body {
+    & > h2 {
+      margin-bottom: 30px;
+      @include rem(26);
+      color: $color-navy;
+      font-weight: bold;
+    }
+
+    & > h3 {
+      margin-bottom: 27px;
+      padding-left: 10px;
+      border-left: 4px solid $color-navy;
+      @include rem(22);
+      color: $color-navy;
+      font-weight: bold;
+    }
+
+    & > p {
+      margin-bottom: 30px;
+      @include rem(16);
+      color: $color-navy;
+    }
+
+    & > .quote {
+      margin-bottom: 30px;
+      padding: 27px 26px 17px 74px;
+      background-color: $color-gray;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        content:"“";
+        @include rem(90);
+        color: #B4B4B4;
+        top: 16px;
+        left: 17px;
+        height: 45px;
+      }
+    }
+
+    & > img {
+      margin-bottom: 30px;
+    }
+
+    & > ul {
+      margin-bottom: 30px;
+      list-style-type: disc;
+      list-style-position: inside;
+      
+      & > li {
+        @include rem(16);
+        color: $color-navy;
+
+        &::marker {
+          color: $material-btn-color;
+          font-size:30px;
+        }
+      }
+    }
+
+    & > a {
+      display: inline-block;
+      margin-bottom: 30px;
+      @include rem(18);
+      color: $material-btn-color;
+      text-decoration: underline;
+    }
+  }
+
+  &__recommend_post {
+    padding: 30px 0;
+    
+    &_ttl {
+      margin-bottom: 30px;
+      @include rem(26);
+      color: $color-navy;
+      font-weight: bold;
+
+      @include mobile {
+        text-align: center;
+      }
+    }
+  }
+}
+
+.recommend_post {
+  display: flex;
+  margin-bottom: 28px;
+
+  @include mobile {
+    display: block;
+  }
+
+  &__thumbnail {
+    position: relative;
+    margin-right: 32px;
+
+    @include mobile {
+      margin-right: 0px;
+    }
+
+    & > figure {
+      & > img {
+        width: 210px;
+        height:128px;
+      }
+    }
+  }
+
+  &__category {
+    position: absolute;
+    display: inline-block;
+    background-color: $color-navy;
+    color: $color-white;
+    @include rem(12);
+    padding: 9px 25px 10px 25px;
+    top:0px;
+  }
+
+  &__dt {
+    display: block;
+    margin-bottom: 29px;
+    @include rem(16);
+    color: $color-navy;
+
+    @include mobile {
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+
+  }
+
+  &__link {
+    display: block;
+    @include rem(18);
+    color: $color-navy;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}
+
+.sns-icon {
+  margin-right: 3px;
+}
+
+.sidebar__area {
+  width: 270px;
+
+  @include tablet {
+    width:100%;
+  }
+}
+
+.sidebar {
+  &__ttl {
+    padding: 18px 0;
+    background-color: $color-navy;
+    color:$color-white;
+    @include rem(21);
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__contents {
+    padding: 30px 0 10px 0;
+  }
+}
+
+.related_post {
+  &__item {
+    display: flex;
+    margin-bottom: 39px;
+
+    @include tablet {
+      margin-left: 30px;
+    }
+  }
+
+  &__thumbnail {
+    margin-right: 17px;
+    & > figure {
+      & > img {
+        width:100px;
+        height:70px;
+      }
+    }
+  }
+
+  &__ttl {
+    & > a {
+      @include rem(12);
+      color: $color-navy; 
+      text-decoration: underline; 
+    }
+  }
+}
+
+.category {
+  &__list {
+    @include tablet {
+      margin-left: 30px;
+    }
+  }
+
+  &__item {
+    margin-bottom: 16px;
+  }
+
+  &__ttl {
+    @include rem(16);
+    color: $color-navy; 
+    font-weight: bold;
+  }
+}
+
+
+//*------------------*
+//*  お問合せ
+//*------------------*
+#contactForm {
+  padding: 58px 0 82px 0;
+}
+
+.contactform {
+  @include rem(16);
+  color: $color-navy; 
+  
+  &__context {
+    @include rem(16);
+    color: $color-navy; 
+
+    &__wrapper {
+      margin-bottom: 41px;
+
+      &.center {
+        text-align: center;
+        width:100%;
+        margin: 0 auto;
+      }
+      
+      & > .thanksmessage {
+        margin-bottom: 83px;
+        @include mobile {
+          @include rem(14);
+        }
+      }
+
+      & > a {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__elm {
+    &__wrapper {
+      margin-bottom: 20px;
+
+      & > label {
+        display: inline-block;
+        margin-bottom: 12px;
+      }
+
+      & > input[type="text"],input[type="email"] {
+        width: 100%;
+        height:50px;
+        padding-left: 20px;
+      }
+
+      & > .radio__wrapper {
+        margin-bottom:14px;
+
+        & > input[type="radio"] {
+          width:20px;
+          height: 20px;
+          margin-top: 3px;
+          margin-right: 19px;
+        } 
+      }
+
+      & > textarea {
+        width:100%;
+        height:250px;
+        resize: none;
+        padding:22px;
+      }
+
+      &.center {
+        text-align: center;
+        width:700px;
+        margin: 33px auto;
+
+        @include mobile {
+          width: 90%;
+        }
+      }
+
+      & > input[type="checkbox"] {
+        width:20px;
+        height: 20px;
+        margin-top: 1px;
+      }
+
+      & > input[type="submit"] {
+        padding:16px 68px 18px 68px;
+        @include rem(16);
+        background-color: $color-navy;
+        color: $color-white;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+//*------------------*
+//*  お問合せ完了
+//*------------------*
+#contactFormComplete {
+  padding: 83px 0 80px 0;
+}
+
+.linkhome {
+  text-decoration: underline;
+}
+
+
+
+//------------//ここまでmain------------------>
+
+//*------------------*
+//*  footer
+//*------------------*
+.material_order {
+  background-image: url(../images/cta.png);
+  background-size: cover;
+  height: 250px;
+  width:100%;
+  text-align: center;
+  padding: 70px 0 41.4px 0;
+
+  @include mobile {
+    background-size: cover;
+  }
+
+  &__ttl {
+    margin-bottom: 16px;
+    & > h3 {
+      @include rem(32);
+      font-weight: bold;
+      color: $color-white;
+      text-shadow: 0px 3px 6px $dropshadow-color;
+
+      @include mobile {
+        @include rem(28);
+      }
+    }
+  }
+}
+
+.telcontact {
+  background-color: $color-white;
+  color:$color-navy;
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    width:900px;
+    margin:0 auto;
+    padding: 20px 65px 23px 0;
+
+    @include tablet {
+      width:700px;
+      display: block;
+      text-align: center
+    }
+
+    @include mobile {
+      width:300px;
+      padding: 20px 0 23px 0;
+    }
+  }
+
+  &__txt {
+    @include rem(16);
+    font-weight: bold;
+  }
+
+  &__number {
+    margin:0 20px;
+    @include rem(36);
+    font-weight: bold;
+
+    @include tablet {
+      margin:20px 0;
+    }
+  }
+
+  &__time {
+    @include rem(16);
+  }
+}
+
+.footer {
+  &__menu {
+    background-color: $color-navy;
+    padding: 49px 0 68px 0;
+
+    &_container {
+      display: flex;
+      justify-content: space-between;
+      width:900px;
+      margin: 0 auto;
+
+      @include tablet {
+        width:700px;
+      }
+
+      @include mobile {
+        width:90%;
+        display: block;
+      }
+    }
+
+    &_nav {
+      & > ul {
+        display: flex;
+
+        & > li {
+          border-left: 1px solid $color-white;
+          padding: 0 21.5px;
+
+          @include mobile {
+            padding: 0 11.5px;
+          }
+
+          &:nth-child(1) {
+            border-left:0px;
+          }
+        }
+      }
+      &_link {
+        color: $color-white;
+        @include rem(16);
+        font-weight: bold;
+
+        @include mobile {
+          @include rem(14);
+        }
+      }
+    }
+
+    &_right {
+      @include mobile {
+        display:flex;
+        justify-content: space-between;
+        margin-top: 40px;
+      }
+
+    }
+
+    &_img {
+      background-color: $color-white;
+      padding: 14px 19px 13px 19px;
+
+      @include mobile {
+        height:40px;
+        padding: 7px 9px;
+      }
+    }
+
+    &_tel {
+      margin-top: 27px;
+      text-align: end;
+      color:$color-white;
+      @include rem(16);
+      font-weight: bold;
+      position:relative;
+
+      @include mobile {
+        margin-top: 0px;
+      }
+      &::before {
+        content: url(../images/phone_white.svg);
+        transform: scale(1.0);
+        position:absolute;
+        top:1px;
+        left:33px;
+
+        @include mobile {
+          left:-13px;
+        }
+      }
+    }
+  
+    &_time {
+      margin-top: 13px;
+      text-align: end;
+      color:$color-white;
+      @include rem(12);
+    }
+  }
+
+
+  &__copyright {
+    background-color: $color-white;
+
+    &_container {
+      width:90%;
+      margin: 0 auto;
+
+      & > p {
+        margin: 12px 0;
+        color: $color-navy;
+        text-align: end;
+        @include rem(12);
+        font-weight: bold;
+      }
+    }
+  }
+}
